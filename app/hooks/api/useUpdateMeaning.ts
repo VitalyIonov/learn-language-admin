@@ -1,11 +1,11 @@
-import { type MeaningUpdate, type MeaningOut } from '~/types/api';
+import { type CategoryUpdate, type CategoryOut } from "~/types/api";
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 
-import { apiClient } from '~/lib/apiClient/apiClient';
+import { apiClient } from "~/lib/apiClient/apiClient";
 
 type Params = {
-  id: MeaningOut['id'] | null;
+  id: CategoryOut["id"] | null;
 };
 
 export const useUpdateMeaning = ({ id }: Params) => {
@@ -13,7 +13,8 @@ export const useUpdateMeaning = ({ id }: Params) => {
 
   const { mutateAsync } = useMutation({
     mutationKey: [url],
-    mutationFn: (data: MeaningUpdate) => apiClient.patch<MeaningOut, MeaningUpdate>(url, data),
+    mutationFn: (data: CategoryUpdate) =>
+      apiClient.patch<CategoryOut, CategoryUpdate>(url, data),
   });
 
   return { updateMeaning: mutateAsync };
