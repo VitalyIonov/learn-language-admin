@@ -13,7 +13,6 @@ export const useImageUpload = () => {
       return axios.put(uploadUrl, file, {
         headers: {
           "Content-Type": file.type,
-          "Cache-Control": "public, max-age=31536000, immutable",
         },
       });
     },

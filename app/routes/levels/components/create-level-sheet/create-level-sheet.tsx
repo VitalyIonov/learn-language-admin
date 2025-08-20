@@ -3,9 +3,8 @@ import React from 'react';
 import { Button } from '~/components/ui/button';
 import { SheetSidebar } from '~/components/sheet-sidebar';
 import { useCreateLevel } from '~/hooks/api/useCreateLevel';
-import { CreateLevelForm } from '~/routes/levels/components/create-level-sheet/elements/create-level-form';
-import { type CreateLevelFormValues } from '~/routes/levels/components/create-level-sheet/types';
-import { FORM_ID } from '~/routes/levels/components/create-level-sheet/constants';
+import { LevelForm } from '~/routes/levels/components/level-form';
+import { type Schema } from '~/routes/levels/schema';
 
 type Props = {
   isOpen: boolean;
@@ -13,10 +12,12 @@ type Props = {
   onSuccess?: () => void;
 };
 
+const FORM_ID = 'create-level-form';
+
 export const CreateLevelSheet = ({ isOpen, onOpenChange, onSuccess }: Props) => {
   const { createLevel } = useCreateLevel();
 
-  const handleCreateLevel = async (data: CreateLevelFormValues) => {
+  const handleCreateLevel = async (data: Schema) => {
     await createLevel(data, {
       onSuccess: () => {
         onSuccess?.();
@@ -28,7 +29,7 @@ export const CreateLevelSheet = ({ isOpen, onOpenChange, onSuccess }: Props) => 
   return (
     <SheetSidebar
       isOpen={isOpen}
-      title="Levels"
+      title="New level"
       onOpenChange={onOpenChange}
       actionButton={
         <Button type="submit" form={FORM_ID}>
@@ -36,7 +37,7 @@ export const CreateLevelSheet = ({ isOpen, onOpenChange, onSuccess }: Props) => 
         </Button>
       }
     >
-      <CreateLevelForm id={FORM_ID} onSubmit={handleCreateLevel} />
+      <LevelForm id={FORM_ID} onSubmit={handleCreateLevel} />
     </SheetSidebar>
   );
 };

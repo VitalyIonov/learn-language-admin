@@ -61,6 +61,11 @@ export const InputFileField = ({
       field.onChange(imageId);
       setImageUrl(newImageUrl);
       setUploadStatus("success");
+      // Очищаем selectedFile после успешной загрузки
+      setSelectedFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } catch (error) {
       setUploadStatus("error");
       console.error("Upload failed:", error);
@@ -75,6 +80,14 @@ export const InputFileField = ({
       fileInputRef.current.value = "";
     }
   };
+
+  const handleRemoveImage = () => {
+    setImageUrl(undefined);
+    field.onChange("");
+  };
+
+  // Показывать инпут только если нет загруженного изображения
+  const showFileInput = !imageUrl || uploadStatus === "error";
 
   const getStatusIcon = () => {
     if (isUploading) return <Loader2 className="h-4 w-4 animate-spin" />;
@@ -98,32 +111,58 @@ export const InputFileField = ({
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <div className="space-y-3">
-              {/* File Input */}
-              <div className="flex items-center gap-2">
-                <Input
-                  ref={fileInputRef}
-                  type="file"
-                  accept={accept}
-                  disabled={disabled || isUploading}
-                  onChange={(e) =>
-                    handleFileSelect(e.target.files?.[0] || null)
-                  }
-                  className="flex-1"
-                />
-                {selectedFile && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={handleClear}
-                    disabled={isUploading}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                )}
-              </div>
+              {/* Image Preview */}
+              {imageUrl && (
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <img
+                      src={imageUrl}
+                      alt="Current image"
+                      className="max-h-48 max-w-full rounded-md border border-border object-contain"
+                    />
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="sm"
+                      className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0"
+                      onClick={handleRemoveImage}
+                      disabled={isUploading}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              )}
 
-              {selectedFile && (
+              {/* File Input - показывать только если нет изображения */}
+              {showFileInput && (
+                <div className="flex items-center gap-2">
+                  <Input
+                    ref={fileInputRef}
+                    type="file"
+                    accept={accept}
+                    disabled={disabled || isUploading}
+                    onChange={(e) =>
+                      handleFileSelect(e.target.files?.[0] || null)
+                    }
+                    className="flex-1"
+                  />
+                  {selectedFile && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleClear}
+                      disabled={isUploading}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+              )}
+
+              {/* Selected File Info */}
+              {selectedFile && showFileInput && (
                 <div className="flex items-center justify-between rounded-md bg-muted p-2">
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium">

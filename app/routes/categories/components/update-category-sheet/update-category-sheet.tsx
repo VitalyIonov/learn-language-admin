@@ -44,6 +44,7 @@ export const UpdateCategorySheet = ({
 
   const defaultValues = {
     name: category?.name || "",
+    imageId: category?.image?.id || undefined,
   };
 
   return (
@@ -60,6 +61,7 @@ export const UpdateCategorySheet = ({
       <CategoryForm
         id={FORM_ID}
         defaultValues={defaultValues}
+        imageUrl={category?.image?.imageUrl}
         onSubmit={handleUpdateCategory}
       />
     </SheetSidebar>

@@ -1,19 +1,19 @@
-import { type CellContext } from '@tanstack/table-core';
-import { memo, useState, useEffect, useCallback } from 'react';
+import { type CellContext } from "@tanstack/table-core";
+import { memo, useState, useEffect, useCallback } from "react";
 
-import { Button } from '~/components/ui/button';
-import { TablePagination, Table, TableToolbar } from '~/components/table';
-import { useLoadLevels } from '~/hooks/api/useLoadLevels';
-import { useDeleteLevel } from '~/hooks/api/useDeleteLevel';
-import { usePagination } from '~/hooks/usePagination';
-import { CreateLevelSheet } from '~/routes/levels/components/create-level-sheet';
-import { MenuCell } from '~/components/table';
-import { type LevelOut } from '~/types/api';
+import { Button } from "~/components/ui/button";
+import { TablePagination, Table, TableToolbar } from "~/components/table";
+import { useLoadLevels } from "~/hooks/api/useLoadLevels";
+import { useDeleteLevel } from "~/hooks/api/useDeleteLevel";
+import { usePagination } from "~/hooks/usePagination";
+import { CreateLevelSheet } from "~/routes/levels/components/create-level-sheet";
+import { MenuCell } from "~/components/table";
+import { type LevelOut } from "~/types/api";
 
 type Props = {};
 
 export const LevelsTable = memo(({}: Props) => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const [isSheetOpened, setIsSheetOpened] = useState(false);
 
   const { offset, setTotalCount, ...pagination } = usePagination();
@@ -38,31 +38,50 @@ export const LevelsTable = memo(({}: Props) => {
 
   const headerActions = [
     {
-      label: 'Удалить',
+      label: "Удалить",
       action: (item: LevelOut) => deleteLevel({ id: item.id }),
     },
   ];
 
   const columns = [
     {
-      accessorKey: 'id',
-      header: 'ID',
+      accessorKey: "id",
+      header: "ID",
       size: 50,
     },
     {
-      accessorKey: 'name',
-      header: 'Name',
+      accessorKey: "name",
+      header: "Name",
       size: 300,
     },
     {
-      accessorKey: 'alias',
-      header: 'Alias',
-      size: 0,
+      accessorKey: "alias",
+      header: "Alias",
+      size: 150,
     },
     {
-      header: ' ',
+      accessorKey: "value",
+      header: "Value",
+      size: 150,
+    },
+    {
+      accessorKey: "questionTypes",
+      header: "Question Types",
+      size: 0,
+      cell: ({ row }: CellContext<LevelOut, void>) => (
+        <div>
+          {row.original.questionTypes
+            .map(({ name }, index) => {
+              return `${name}${index === row.original.questionTypes.length - 1 ? "" : ", "}`;
+            })
+            .concat("")}
+        </div>
+      ),
+    },
+    {
+      header: " ",
       size: 80,
-      meta: { align: 'center' as const },
+      meta: { align: "center" as const },
       cell: ({ row }: CellContext<LevelOut, void>) => (
         <MenuCell item={row.original} actions={headerActions} />
       ),
@@ -78,7 +97,7 @@ export const LevelsTable = memo(({}: Props) => {
   };
 
   return (
-    <div className="flex w-150 flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <TableToolbar
         searchValue={searchValue}
         onSearchChange={handleSearchChange}

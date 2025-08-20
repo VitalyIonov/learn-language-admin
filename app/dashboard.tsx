@@ -1,15 +1,15 @@
-import React from 'react';
-import { Outlet } from 'react-router';
+import React from "react";
+import { Outlet } from "react-router";
 
-import { SidebarProvider, SidebarTrigger } from '~/components/ui/sidebar';
-import { AppSidebar } from '~/components/app-sidebar';
-import { useLoadCurrentUser } from '~/hooks/api/useLoadCurrentUser';
+import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
+import { AppSidebar } from "~/components/app-sidebar";
+import { useLoadCurrentUser } from "~/hooks/api/useLoadCurrentUser";
 
 const Dashboard = () => {
   const { currentUser, isFetching } = useLoadCurrentUser();
 
   return (
-    <SidebarProvider>
+    <SidebarProvider className="mx-auto max-w-[1600px]">
       <AppSidebar currentUser={currentUser} />
       <Outlet />
     </SidebarProvider>

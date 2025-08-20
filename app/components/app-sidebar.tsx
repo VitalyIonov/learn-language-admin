@@ -1,5 +1,5 @@
-import { Home, Inbox, Search, Settings } from 'lucide-react';
-import { type UserOut } from '~/types/api';
+import { Home, Inbox, Search, Settings } from "lucide-react";
+import { type UserOut } from "~/types/api";
 
 import {
   Sidebar,
@@ -11,34 +11,34 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
-} from '~/components/ui/sidebar';
+} from "~/components/ui/sidebar";
 
-import { NavUser } from '~/components/nav-user';
+import { NavUser } from "~/components/nav-user";
 
 const items = [
   {
-    title: 'Users',
-    url: '/admin/users',
+    title: "Users",
+    url: "/admin/users",
     icon: Home,
   },
   {
-    title: 'Categories',
-    url: '/admin/categories',
+    title: "Categories",
+    url: "/admin/categories",
     icon: Inbox,
   },
   {
-    title: 'Levels',
-    url: '/admin/levels',
+    title: "Levels",
+    url: "/admin/levels",
     icon: Inbox,
   },
   {
-    title: 'Meanings',
-    url: '/admin/meanings',
+    title: "Meanings",
+    url: "/admin/meanings",
     icon: Inbox,
   },
   {
-    title: 'Definitions',
-    url: '/admin/definitions',
+    title: "Definitions",
+    url: "/admin/definitions",
     icon: Inbox,
   },
 ];

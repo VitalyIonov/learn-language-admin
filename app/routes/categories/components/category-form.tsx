@@ -1,16 +1,21 @@
 import { useEffect, type ChangeEvent } from "react";
 import { Form } from "~/components/form";
-import { InputField, InputFileField } from "~/components/form-fields";
+import {
+  InputField,
+  InputFileField,
+  QuestionTypesField,
+} from "~/components/form-fields";
 import { useCategoryForm } from "~/routes/categories/hooks/use-category-form";
 import { type Schema } from "~/routes/categories/schema";
 
 type Props = {
   id: string;
   defaultValues?: Schema;
+  imageUrl?: string;
   onSubmit: (data: Schema) => void;
 };
 
-export function CategoryForm({ id, defaultValues, onSubmit }: Props) {
+export function CategoryForm({ id, defaultValues, onSubmit, imageUrl }: Props) {
   const { formMethods, control } = useCategoryForm({ defaultValues });
   console.log("getValues", formMethods.getValues());
 
@@ -32,6 +37,7 @@ export function CategoryForm({ id, defaultValues, onSubmit }: Props) {
         label="Category Image"
         control={control}
         accept="image/*"
+        initialImageUrl={imageUrl}
       />
     </Form>
   );

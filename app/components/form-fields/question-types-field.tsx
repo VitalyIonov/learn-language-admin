@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Control, FieldValues, Path } from "react-hook-form";
 
 import {
@@ -8,8 +7,9 @@ import {
   FormMessage,
   FormField,
 } from "~/components/ui/form";
-import { SingleSelect } from "~/components/single-select";
-import { useLoadCategories } from "~/hooks/api/useLoadCategories";
+import { MultiSelect } from "~/components/multi-select";
+
+import { useLoadQuestionTypes } from "~/hooks/api/useLoadQuestionTypes";
 
 type Props<FormValues extends FieldValues> = {
   name: Path<FormValues>;
@@ -19,14 +19,13 @@ type Props<FormValues extends FieldValues> = {
   placeholder?: string;
 };
 
-export function CategoriesField<FormValues extends FieldValues>({
+export function QuestionTypesField<FormValues extends FieldValues>({
   control,
   name,
   placeholder,
   label,
 }: Props<FormValues>) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const { categories } = useLoadCategories({ q: searchQuery });
+  const { questionTypes } = useLoadQuestionTypes();
 
   return (
     <FormField
@@ -36,11 +35,9 @@ export function CategoriesField<FormValues extends FieldValues>({
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <SingleSelect
-              options={categories}
+            <MultiSelect
+              options={questionTypes}
               labelKey="name"
-              searchQuery={searchQuery}
-              onSearchQueryChange={setSearchQuery}
               placeholder={placeholder}
               {...field}
             />

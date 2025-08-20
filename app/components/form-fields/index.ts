@@ -5,3 +5,4 @@ export * from "./levels-field";
 export * from "./categories-field";
 export * from "./meanings-field";
 export * from "./input-file-field";
+export * from "./question-types-field";
