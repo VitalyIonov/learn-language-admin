@@ -1,38 +1,53 @@
-import { useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router';
+import { useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router";
 
-import type { Route } from './+types/login';
-import { Card, CardContent } from '~/components/ui/card';
-import { Button } from '~/components/ui/button';
+import type { Route } from "./+types/login";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Button } from "~/components/ui/button";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: 'Login' }, { name: 'description', content: 'Login' }];
+  return [{ title: "Login" }, { name: "description", content: "Login" }];
 }
 
 export default function Login() {
-  const navigate = useNavigate();
   const [urlSearchParams] = useSearchParams();
-  const accessToken = urlSearchParams.get('access_token');
+  const accessToken = urlSearchParams.get("access_token");
 
   const handleGoogleLoginClick = () => {
-    window.location.href = 'http://localhost:8000/api/v1/auth/google/login';
+    window.location.href = "http://localhost:8000/api/v1/auth/google/login";
   };
 
   useEffect(() => {
     if (accessToken) {
-      localStorage.setItem('token', accessToken);
+      localStorage.setItem("token", accessToken);
 
-      window.location.href = '/';
+      window.location.href = "/";
     }
   }, [accessToken]);
 
+  // https://ui.shadcn.com/blocks/authentication
   return (
-    <Card>
-      <CardContent>
-        <Button variant="outline" className="w-full" onClick={handleGoogleLoginClick}>
-          Login with Google
-        </Button>
-      </CardContent>
-    </Card>
+    <div className="flex h-[100vh] items-center justify-center">
+      <Card className="m-auto flex w-sm flex-col gap-6">
+        <CardHeader>
+          <CardTitle>Login to your account</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3">
+                <Button
+                  variant="outline"
+                  className="w-full cursor-pointer"
+                  onClick={handleGoogleLoginClick}
+                >
+                  Login with Google
+                </Button>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
