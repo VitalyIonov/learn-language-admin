@@ -5,8 +5,7 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 
-ARG BASENAME=/admin
-RUN npx react-router build --basename ${BASENAME}
+RUN npx react-router build
 
 FROM node:20-alpine AS prod
 WORKDIR /app
