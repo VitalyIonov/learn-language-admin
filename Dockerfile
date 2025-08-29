@@ -1,4 +1,3 @@
-# ===== build =====
 FROM node:20-alpine AS build
 WORKDIR /app
 
@@ -9,8 +8,7 @@ COPY . .
 ARG BASENAME=/admin
 RUN npx react-router build --basename ${BASENAME}
 
-# ===== runtime =====
-FROM node:20-alpine
+FROM node:20-alpine AS prod
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
