@@ -37,7 +37,7 @@ jobs:
             ghcr.io/vitalyionov/learn-language-admin:${{ github.sha }}
           build-args: |
             BASENAME=/admin
-            VITE_API_URL=https://learn-language.es/api/v1
+            VITE_API_URL=/api/v1
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router";
+import { useSearchParams, useNavigate } from "react-router";
 
 import type { Route } from "./+types/login";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
@@ -14,6 +14,9 @@ export default function Login() {
   const accessToken = urlSearchParams.get("access_token");
 
   const handleGoogleLoginClick = () => {
+    // const API_BASE = import.meta.env.VITE_API_URL || "/api/v1";
+    //
+    // window.location.href = `${API_BASE}/auth/google/login`;
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/google/login`;
   };
 
