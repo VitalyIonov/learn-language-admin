@@ -41,19 +41,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Copy files to server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "docker-compose.yml"
-          target: /opt/learn-language/admin
-          overwrite: true
-          tar_exec: tar
-        env:
-          TAR_OPTIONS: --no-same-owner --no-same-permissions
-
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.1.0
         with:
