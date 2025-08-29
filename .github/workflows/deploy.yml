@@ -1,0 +1,82 @@
+name: Deploy admin image
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: vitalyionov
+          password: ${{ secrets.GHCR_PAT }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          target: prod
+          tags: |
+            ghcr.io/vitalyionov/learn-language-admin:latest
+            ghcr.io/vitalyionov/learn-language-admin:${{ github.sha }}
+          build-args: |
+            BASENAME=/admin
+            VITE_API_URL=https://learn-language.es/api/v1
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "docker-compose.yml"
+          target: /opt/learn-language/admin
+          overwrite: true
+          tar_exec: tar
+        env:
+          TAR_OPTIONS: --no-same-owner --no-same-permissions
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /opt/learn-language
+            echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u vitalyionov --password-stdin
+            ADMIN_IMAGE_TAG=${{ github.sha }} docker compose -f docker-compose.yml -f docker-compose.prod.yml pull admin
+            ADMIN_IMAGE_TAG=${{ github.sha }} docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d admin --no-deps --force-recreate
+            docker system prune -f
+
+      - name: Telegram notify
+        if: ${{ always() }}
+        uses: appleboy/telegram-action@v1.0.1
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: markdown
+          disable_web_page_preview: true
+          message: |
+            ${{ job.status == 'success' && '✅' || '❌' }} Deploy *${{ job.status }}* for *${{ github.repository }}*
+            *Branch:* ${{ github.ref_name }}
+            *Commit:* ${{ github.sha }}
+            [Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})

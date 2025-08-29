@@ -5,7 +5,6 @@
   "scripts": {
     "typegen": "orval",
     "build": "react-router build",
-    "build1": "vite build",
     "dev": "npm run typegen && react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
