@@ -1,0 +1,25 @@
+import { type ImageDefinitionOut } from "~/types/api";
+import type { UseMutationOptions } from "@tanstack/react-query";
+
+import { useMutation } from "@tanstack/react-query";
+
+import { apiClient } from "~/lib/apiClient/apiClient";
+
+type Params = {
+  id: ImageDefinitionOut["id"];
+};
+
+export const useDeleteImageDefinition = (
+  options?: UseMutationOptions<void, unknown, Params>,
+) => {
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ id }) => {
+      const url = `admin/image_definitions/${id}`;
+
+      await apiClient.delete(url);
+    },
+    ...options,
+  });
+
+  return { deleteDefinition: mutateAsync };
+};

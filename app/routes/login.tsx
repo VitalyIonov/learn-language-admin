@@ -14,9 +14,6 @@ export default function Login() {
   const accessToken = urlSearchParams.get("access_token");
 
   const handleGoogleLoginClick = () => {
-    // const API_BASE = import.meta.env.VITE_API_URL || "/api/v1";
-    //
-    // window.location.href = `${API_BASE}/auth/google/login`;
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/google/login`;
   };
 

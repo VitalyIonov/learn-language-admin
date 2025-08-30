@@ -17,10 +17,10 @@ import type {
   CategoryUpdate,
   CommitImageRequest,
   CommitImageResponse,
-  DefinitionCreate,
-  DefinitionListResponse,
-  DefinitionOutIds,
-  DefinitionUpdate,
+  ImageDefinitionCreate,
+  ImageDefinitionListResponse,
+  ImageDefinitionOut,
+  ImageDefinitionUpdate,
   LevelCreate,
   LevelOut,
   LevelsListResponse,
@@ -30,9 +30,14 @@ import type {
   MeaningsListResponse,
   QuestionTypeListResponse,
   ReadCategoriesCategoriesGetParams,
-  ReadDefinitionsDefinitionsGetParams,
+  ReadImageDefinitionsImageDefinitionsGetParams,
   ReadLevelsLevelsGetParams,
   ReadMeaningsMeaningsGetParams,
+  ReadTextDefinitionsTextDefinitionsGetParams,
+  TextDefinitionCreate,
+  TextDefinitionListResponse,
+  TextDefinitionOutIds,
+  TextDefinitionUpdate,
   UploadImageRequest,
   UploadImageResponse,
   UserOut
@@ -73,9 +78,9 @@ const readCategoryCategoriesCategoryIdGet = <TData = AxiosResponse<CategoryOut>>
   }
 
 /**
- * @summary Update Meaning Endpoint
+ * @summary Update Category Endpoint
  */
-const updateMeaningEndpointCategoriesCategoryIdPatch = <TData = AxiosResponse<CategoryOut>>(
+const updateCategoryEndpointCategoriesCategoryIdPatch = <TData = AxiosResponse<CategoryOut>>(
     categoryId: number,
     categoryUpdate: CategoryUpdate, options?: AxiosRequestConfig
  ): Promise<TData> => {
@@ -86,9 +91,9 @@ const updateMeaningEndpointCategoriesCategoryIdPatch = <TData = AxiosResponse<Ca
   }
 
 /**
- * @summary Delete Meaning Endpoint
+ * @summary Delete Category Endpoint
  */
-const deleteMeaningEndpointCategoriesCategoryIdDelete = <TData = AxiosResponse<unknown>>(
+const deleteCategoryEndpointCategoriesCategoryIdDelete = <TData = AxiosResponse<unknown>>(
     categoryId: number, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.delete(
@@ -218,62 +223,122 @@ const deleteMeaningEndpointMeaningsMeaningIdDelete = <TData = AxiosResponse<unkn
   }
 
 /**
- * @summary Read Definitions
+ * @summary Read Text Definitions
  */
-const readDefinitionsDefinitionsGet = <TData = AxiosResponse<DefinitionListResponse>>(
-    params?: ReadDefinitionsDefinitionsGetParams, options?: AxiosRequestConfig
+const readTextDefinitionsTextDefinitionsGet = <TData = AxiosResponse<TextDefinitionListResponse>>(
+    params?: ReadTextDefinitionsTextDefinitionsGetParams, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `/definitions`,{
+      `/text_definitions`,{
     ...options,
         params: {...params, ...options?.params},}
     );
   }
 
 /**
- * @summary Add Definition
+ * @summary Add Text Definition
  */
-const addDefinitionDefinitionsPost = <TData = AxiosResponse<DefinitionOutIds>>(
-    definitionCreate: DefinitionCreate, options?: AxiosRequestConfig
+const addTextDefinitionTextDefinitionsPost = <TData = AxiosResponse<TextDefinitionOutIds>>(
+    textDefinitionCreate: TextDefinitionCreate, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
-      `/definitions`,
-      definitionCreate,options
+      `/text_definitions`,
+      textDefinitionCreate,options
     );
   }
 
 /**
- * @summary Read Definition
+ * @summary Read Text Definition
  */
-const readDefinitionDefinitionsDefinitionIdGet = <TData = AxiosResponse<DefinitionOutIds>>(
+const readTextDefinitionTextDefinitionsDefinitionIdGet = <TData = AxiosResponse<TextDefinitionOutIds>>(
     definitionId: number, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `/definitions/${definitionId}`,options
+      `/text_definitions/${definitionId}`,options
     );
   }
 
 /**
- * @summary Patch Definition
+ * @summary Patch Text Definition
  */
-const patchDefinitionDefinitionsDefinitionIdPatch = <TData = AxiosResponse<DefinitionOutIds>>(
+const patchTextDefinitionTextDefinitionsDefinitionIdPatch = <TData = AxiosResponse<TextDefinitionOutIds>>(
     definitionId: number,
-    definitionUpdate: DefinitionUpdate, options?: AxiosRequestConfig
+    textDefinitionUpdate: TextDefinitionUpdate, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.patch(
-      `/definitions/${definitionId}`,
-      definitionUpdate,options
+      `/text_definitions/${definitionId}`,
+      textDefinitionUpdate,options
     );
   }
 
 /**
- * @summary Delete Definition Endpoint
+ * @summary Delete Text Definition
  */
-const deleteDefinitionEndpointDefinitionsDefinitionIdDelete = <TData = AxiosResponse<unknown>>(
+const deleteTextDefinitionTextDefinitionsDefinitionIdDelete = <TData = AxiosResponse<unknown>>(
     definitionId: number, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.delete(
-      `/definitions/${definitionId}`,options
+      `/text_definitions/${definitionId}`,options
+    );
+  }
+
+/**
+ * @summary Read Image Definitions
+ */
+const readImageDefinitionsImageDefinitionsGet = <TData = AxiosResponse<ImageDefinitionListResponse>>(
+    params?: ReadImageDefinitionsImageDefinitionsGetParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/image_definitions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+/**
+ * @summary Add Image Definition
+ */
+const addImageDefinitionImageDefinitionsPost = <TData = AxiosResponse<ImageDefinitionOut>>(
+    imageDefinitionCreate: ImageDefinitionCreate, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/image_definitions`,
+      imageDefinitionCreate,options
+    );
+  }
+
+/**
+ * @summary Read Image Definition
+ */
+const readImageDefinitionImageDefinitionsDefinitionIdGet = <TData = AxiosResponse<ImageDefinitionOut>>(
+    definitionId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/image_definitions/${definitionId}`,options
+    );
+  }
+
+/**
+ * @summary Patch Image Definition
+ */
+const patchImageDefinitionImageDefinitionsDefinitionIdPatch = <TData = AxiosResponse<ImageDefinitionOut>>(
+    definitionId: number,
+    imageDefinitionUpdate: ImageDefinitionUpdate, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/image_definitions/${definitionId}`,
+      imageDefinitionUpdate,options
+    );
+  }
+
+/**
+ * @summary Delete Image Definition
+ */
+const deleteImageDefinitionImageDefinitionsDefinitionIdDelete = <TData = AxiosResponse<unknown>>(
+    definitionId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/image_definitions/${definitionId}`,options
     );
   }
 
@@ -312,12 +377,12 @@ const readQuestionTypesQuestionTypesGet = <TData = AxiosResponse<QuestionTypeLis
     );
   }
 
-return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateMeaningEndpointCategoriesCategoryIdPatch,deleteMeaningEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,readDefinitionsDefinitionsGet,addDefinitionDefinitionsPost,readDefinitionDefinitionsDefinitionIdGet,patchDefinitionDefinitionsDefinitionIdPatch,deleteDefinitionEndpointDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet}};
+return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateCategoryEndpointCategoriesCategoryIdPatch,deleteCategoryEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,readTextDefinitionsTextDefinitionsGet,addTextDefinitionTextDefinitionsPost,readTextDefinitionTextDefinitionsDefinitionIdGet,patchTextDefinitionTextDefinitionsDefinitionIdPatch,deleteTextDefinitionTextDefinitionsDefinitionIdDelete,readImageDefinitionsImageDefinitionsGet,addImageDefinitionImageDefinitionsPost,readImageDefinitionImageDefinitionsDefinitionIdGet,patchImageDefinitionImageDefinitionsDefinitionIdPatch,deleteImageDefinitionImageDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet}};
 export type ReadUsersUsersGetResult = AxiosResponse<UserOut[]>
 export type ReadUserCurrentUserGetResult = AxiosResponse<UserOut>
 export type ReadCategoryCategoriesCategoryIdGetResult = AxiosResponse<CategoryOut>
-export type UpdateMeaningEndpointCategoriesCategoryIdPatchResult = AxiosResponse<CategoryOut>
-export type DeleteMeaningEndpointCategoriesCategoryIdDeleteResult = AxiosResponse<unknown>
+export type UpdateCategoryEndpointCategoriesCategoryIdPatchResult = AxiosResponse<CategoryOut>
+export type DeleteCategoryEndpointCategoriesCategoryIdDeleteResult = AxiosResponse<unknown>
 export type AddCategoryCategoriesPostResult = AxiosResponse<CategoryOut>
 export type ReadCategoriesCategoriesGetResult = AxiosResponse<CategoriesListResponse>
 export type AddLevelLevelsPostResult = AxiosResponse<LevelOut>
@@ -328,11 +393,16 @@ export type AddMeaningMeaningsPostResult = AxiosResponse<MeaningOut>
 export type ReadMeaningMeaningsMeaningIdGetResult = AxiosResponse<MeaningOut>
 export type UpdateMeaningEndpointMeaningsMeaningIdPatchResult = AxiosResponse<MeaningOut>
 export type DeleteMeaningEndpointMeaningsMeaningIdDeleteResult = AxiosResponse<unknown>
-export type ReadDefinitionsDefinitionsGetResult = AxiosResponse<DefinitionListResponse>
-export type AddDefinitionDefinitionsPostResult = AxiosResponse<DefinitionOutIds>
-export type ReadDefinitionDefinitionsDefinitionIdGetResult = AxiosResponse<DefinitionOutIds>
-export type PatchDefinitionDefinitionsDefinitionIdPatchResult = AxiosResponse<DefinitionOutIds>
-export type DeleteDefinitionEndpointDefinitionsDefinitionIdDeleteResult = AxiosResponse<unknown>
+export type ReadTextDefinitionsTextDefinitionsGetResult = AxiosResponse<TextDefinitionListResponse>
+export type AddTextDefinitionTextDefinitionsPostResult = AxiosResponse<TextDefinitionOutIds>
+export type ReadTextDefinitionTextDefinitionsDefinitionIdGetResult = AxiosResponse<TextDefinitionOutIds>
+export type PatchTextDefinitionTextDefinitionsDefinitionIdPatchResult = AxiosResponse<TextDefinitionOutIds>
+export type DeleteTextDefinitionTextDefinitionsDefinitionIdDeleteResult = AxiosResponse<unknown>
+export type ReadImageDefinitionsImageDefinitionsGetResult = AxiosResponse<ImageDefinitionListResponse>
+export type AddImageDefinitionImageDefinitionsPostResult = AxiosResponse<ImageDefinitionOut>
+export type ReadImageDefinitionImageDefinitionsDefinitionIdGetResult = AxiosResponse<ImageDefinitionOut>
+export type PatchImageDefinitionImageDefinitionsDefinitionIdPatchResult = AxiosResponse<ImageDefinitionOut>
+export type DeleteImageDefinitionImageDefinitionsDefinitionIdDeleteResult = AxiosResponse<unknown>
 export type InitImageUploadImagesUploadInitPostResult = AxiosResponse<UploadImageResponse>
 export type CommitImageUploadImagesUploadCommitPostResult = AxiosResponse<CommitImageResponse>
 export type ReadQuestionTypesQuestionTypesGetResult = AxiosResponse<QuestionTypeListResponse>

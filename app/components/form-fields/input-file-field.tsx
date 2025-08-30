@@ -61,7 +61,6 @@ export const InputFileField = ({
       field.onChange(imageId);
       setImageUrl(newImageUrl);
       setUploadStatus("success");
-      // Очищаем selectedFile после успешной загрузки
       setSelectedFile(null);
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
@@ -86,7 +85,6 @@ export const InputFileField = ({
     field.onChange("");
   };
 
-  // Показывать инпут только если нет загруженного изображения
   const showFileInput = !imageUrl || uploadStatus === "error";
 
   const getStatusIcon = () => {
@@ -111,14 +109,13 @@ export const InputFileField = ({
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <div className="space-y-3">
-              {/* Image Preview */}
               {imageUrl && (
                 <div className="flex justify-center">
                   <div className="relative">
                     <img
                       src={imageUrl}
                       alt="Current image"
-                      className="max-h-48 max-w-full rounded-md border border-border object-contain"
+                      className="max-h-48 max-w-full rounded-md border border-border bg-stone-100 object-contain"
                     />
                     <Button
                       type="button"
@@ -161,7 +158,6 @@ export const InputFileField = ({
                 </div>
               )}
 
-              {/* Selected File Info */}
               {selectedFile && showFileInput && (
                 <div className="flex items-center justify-between rounded-md bg-muted p-2">
                   <div className="min-w-0 flex-1">

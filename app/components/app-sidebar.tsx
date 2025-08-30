@@ -10,6 +10,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarFooter,
 } from "~/components/ui/sidebar";
 
@@ -38,8 +41,19 @@ const items = [
   },
   {
     title: "Definitions",
-    url: "/admin/definitions",
     icon: Inbox,
+    subItems: [
+      {
+        title: "Text definitions",
+        url: "/admin/definitions/text",
+        icon: Inbox,
+      },
+      {
+        title: "Image definitions",
+        url: "/admin/definitions/image",
+        icon: Inbox,
+      },
+    ],
   },
 ];
 
@@ -58,11 +72,32 @@ export function AppSidebar({ currentUser }: Props) {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
+                    {item.url ? (
+                      <a href={item.url}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </a>
+                    ) : (
+                      <p>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </p>
+                    )}
                   </SidebarMenuButton>
+                  {item.subItems ? (
+                    <SidebarMenuSub>
+                      {item.subItems.map((subItem) => (
+                        <SidebarMenuSubItem>
+                          <SidebarMenuSubButton asChild>
+                            <a href={subItem.url}>
+                              <subItem.icon />
+                              <span>{subItem.title}</span>
+                            </a>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  ) : null}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

@@ -9,6 +9,7 @@ export default defineConfig({
       target: "app/types/api-generated.ts",
       schemas: "app/types/api",
       client: "axios",
+      clean: true,
     },
   },
   authApi: {
