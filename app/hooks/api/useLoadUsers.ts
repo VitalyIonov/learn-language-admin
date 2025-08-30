@@ -1,16 +1,16 @@
-import { type ReadLevelsLevelsGetResult } from "~/types/api-generated";
-import { type ReadLevelsLevelsGetParams } from "~/types/api";
+import { type ReadUsersUsersGetResult } from "~/types/api-generated";
+import { type ReadUsersUsersGetParams } from "~/types/api";
 import { buildUrlWithParams } from "~/lib/url";
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { apiClient } from "~/lib/apiClient/apiClient";
 
-export const useLoadLevels = (params: ReadLevelsLevelsGetParams = {}) => {
+export const useLoadUsers = (params: ReadUsersUsersGetParams = {}) => {
   const queryClient = useQueryClient();
-  const url = buildUrlWithParams("admin/levels", params);
+  const url = buildUrlWithParams("admin/users", params);
 
-  const { data, isFetching } = useQuery<ReadLevelsLevelsGetResult>(
+  const { data, isFetching } = useQuery<ReadUsersUsersGetResult>(
     { queryKey: [url], queryFn: () => apiClient.get(url) },
     queryClient,
   );
@@ -20,7 +20,7 @@ export const useLoadLevels = (params: ReadLevelsLevelsGetParams = {}) => {
   };
 
   return {
-    levels: data?.data.items,
+    users: data?.data.items,
     meta: data?.data.meta,
     isFetching,
     invalidate,

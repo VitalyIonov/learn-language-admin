@@ -9,8 +9,8 @@ import {
 export default [
   ...prefix("admin", [
     layout("./dashboard.tsx", [
-      index("routes/users.tsx", { id: "index-users" }),
-      route("users", "routes/users.tsx"),
+      index("routes/users/index.tsx", { id: "index-users" }),
+      route("users", "routes/users/index.tsx"),
       route("categories", "routes/categories/index.tsx"),
       route("levels", "routes/levels/index.tsx"),
       route("meanings", "routes/meanings/index.tsx"),

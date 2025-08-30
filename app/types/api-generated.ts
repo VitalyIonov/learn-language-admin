@@ -34,24 +34,28 @@ import type {
   ReadLevelsLevelsGetParams,
   ReadMeaningsMeaningsGetParams,
   ReadTextDefinitionsTextDefinitionsGetParams,
+  ReadUsersUsersGetParams,
   TextDefinitionCreate,
   TextDefinitionListResponse,
   TextDefinitionOutIds,
   TextDefinitionUpdate,
   UploadImageRequest,
   UploadImageResponse,
-  UserOut
+  UserOut,
+  UsersListResponse
 } from './api';
 
 export const getAdmin = () => {
 /**
  * @summary Read Users
  */
-const readUsersUsersGet = <TData = AxiosResponse<UserOut[]>>(
-     options?: AxiosRequestConfig
+const readUsersUsersGet = <TData = AxiosResponse<UsersListResponse>>(
+    params?: ReadUsersUsersGetParams, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
-      `/users`,options
+      `/users`,{
+    ...options,
+        params: {...params, ...options?.params},}
     );
   }
 
@@ -378,7 +382,7 @@ const readQuestionTypesQuestionTypesGet = <TData = AxiosResponse<QuestionTypeLis
   }
 
 return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateCategoryEndpointCategoriesCategoryIdPatch,deleteCategoryEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,readTextDefinitionsTextDefinitionsGet,addTextDefinitionTextDefinitionsPost,readTextDefinitionTextDefinitionsDefinitionIdGet,patchTextDefinitionTextDefinitionsDefinitionIdPatch,deleteTextDefinitionTextDefinitionsDefinitionIdDelete,readImageDefinitionsImageDefinitionsGet,addImageDefinitionImageDefinitionsPost,readImageDefinitionImageDefinitionsDefinitionIdGet,patchImageDefinitionImageDefinitionsDefinitionIdPatch,deleteImageDefinitionImageDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet}};
-export type ReadUsersUsersGetResult = AxiosResponse<UserOut[]>
+export type ReadUsersUsersGetResult = AxiosResponse<UsersListResponse>
 export type ReadUserCurrentUserGetResult = AxiosResponse<UserOut>
 export type ReadCategoryCategoriesCategoryIdGetResult = AxiosResponse<CategoryOut>
 export type UpdateCategoryEndpointCategoriesCategoryIdPatchResult = AxiosResponse<CategoryOut>
