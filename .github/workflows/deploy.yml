@@ -50,8 +50,8 @@ jobs:
           script: |
             cd /opt/learn-language
             echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u vitalyionov --password-stdin
-            ADMIN_IMAGE_TAG=${{ github.sha }} docker compose -f docker-compose.yml -f docker-compose.prod.yml pull admin
-            ADMIN_IMAGE_TAG=${{ github.sha }} docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d admin --no-deps --force-recreate
+            ADMIN_IMAGE_TAG=${{ github.sha }} docker compose pull admin
+            ADMIN_IMAGE_TAG=${{ github.sha }} docker compose up -d admin --no-deps --force-recreate
             docker system prune -f
 
       - name: Telegram notify
