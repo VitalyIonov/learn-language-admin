@@ -4,14 +4,16 @@
  * admin
  * OpenAPI spec version: 0.1.0
  */
+import type { TextDefinitionOutAudio } from './textDefinitionOutAudio';
 import type { TextDefinitionOutCategory } from './textDefinitionOutCategory';
 import type { TextDefinitionOutLevel } from './textDefinitionOutLevel';
 import type { MeaningOut } from './meaningOut';
 
 export interface TextDefinitionOut {
   id: number;
-  text: string;
   type?: 'text';
+  text: string;
+  audio?: TextDefinitionOutAudio;
   category?: TextDefinitionOutCategory;
   level?: TextDefinitionOutLevel;
   meanings?: MeaningOut[];

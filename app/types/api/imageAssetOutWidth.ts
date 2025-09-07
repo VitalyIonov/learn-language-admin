@@ -5,6 +5,4 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface CommitImageRequest {
-  imageId: number;
-}
+export type ImageAssetOutWidth = number | null;

@@ -4,11 +4,13 @@
  * admin
  * OpenAPI spec version: 0.1.0
  */
+import type { TextDefinitionCreateAudioId } from './textDefinitionCreateAudioId';
 import type { TextDefinitionCreateCategoryId } from './textDefinitionCreateCategoryId';
 import type { TextDefinitionCreateLevelId } from './textDefinitionCreateLevelId';
 
 export interface TextDefinitionCreate {
   text: string;
+  audioId?: TextDefinitionCreateAudioId;
   categoryId?: TextDefinitionCreateCategoryId;
   levelId?: TextDefinitionCreateLevelId;
   meaningIds?: number[];

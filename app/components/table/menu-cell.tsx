@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { MoreVertical } from 'lucide-react';
+import * as React from "react";
+import { MoreVertical } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -8,12 +8,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuGroup,
-} from '~/components/ui/dropdown-menu';
-import { Button } from '~/components/ui/button';
+} from "~/components/ui/dropdown-menu";
+import { Button } from "~/components/ui/button";
 
 type Props<Data> = {
   item: Data;
-  actions: { label: string; action: (item: Data) => void }[];
+  actions: {
+    label: string;
+    action: (item: Data) => void;
+    shouldDisplay?: (item: Data) => boolean;
+  }[];
 };
 
 export function MenuCell<Data>({ item, actions }: Props<Data>) {
@@ -28,11 +32,17 @@ export function MenuCell<Data>({ item, actions }: Props<Data>) {
         <DropdownMenuLabel>Действия</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {actions.map(({ label, action }) => (
-            <DropdownMenuItem key={label} onSelect={() => action(item)}>
-              {label}
-            </DropdownMenuItem>
-          ))}
+          {actions.map(({ label, action, shouldDisplay = () => true }) => {
+            if (shouldDisplay?.(item)) {
+              return (
+                <DropdownMenuItem key={label} onSelect={() => action(item)}>
+                  {label}
+                </DropdownMenuItem>
+              );
+            }
+
+            return null;
+          })}
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -5,12 +5,14 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { TextDefinitionUpdateText } from './textDefinitionUpdateText';
+import type { TextDefinitionUpdateAudioId } from './textDefinitionUpdateAudioId';
 import type { TextDefinitionUpdateCategoryId } from './textDefinitionUpdateCategoryId';
 import type { TextDefinitionUpdateLevelId } from './textDefinitionUpdateLevelId';
 import type { TextDefinitionUpdateMeaningIds } from './textDefinitionUpdateMeaningIds';
 
 export interface TextDefinitionUpdate {
   text?: TextDefinitionUpdateText;
+  audioId?: TextDefinitionUpdateAudioId;
   categoryId?: TextDefinitionUpdateCategoryId;
   levelId?: TextDefinitionUpdateLevelId;
   meaningIds?: TextDefinitionUpdateMeaningIds;

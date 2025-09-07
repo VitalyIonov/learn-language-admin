@@ -5,4 +5,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export type AssetOutWidth = number | null;
+export interface ImageAssetUploadOut {
+  uploadUrl: string;
+  fileKey: string;
+  imageId: number;
+}

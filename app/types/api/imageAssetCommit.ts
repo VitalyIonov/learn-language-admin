@@ -5,6 +5,6 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface CommitImageResponse {
-  imageUrl: string;
+export interface ImageAssetCommit {
+  imageId: number;
 }

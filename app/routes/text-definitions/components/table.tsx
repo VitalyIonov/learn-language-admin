@@ -10,6 +10,7 @@ import {
 } from "~/components/table";
 import { useLoadTextDefinitions } from "~/hooks/api/useLoadTextDefinitions";
 import { useDeleteTextDefinition } from "~/hooks/api/useDeleteTextDefinition";
+import { useTextDefinitionGenerateAudio } from "~/hooks/api/useTextDefinitionGenerateAudio";
 import { usePagination } from "~/hooks/usePagination";
 import { CreateSheet } from "~/routes/text-definitions/components/create-sheet";
 import { UpdateSheet } from "~/routes/text-definitions/components/update-sheet";
@@ -30,7 +31,7 @@ export const Table = memo(({}: Props) => {
   const {
     definitions,
     meta,
-    invalidate: invalidateMeanings,
+    invalidate: invalidateTextDefinitions,
   } = useLoadTextDefinitions({
     q: searchValue,
     limit: pagination.pageSize,
@@ -38,7 +39,11 @@ export const Table = memo(({}: Props) => {
   });
 
   const { deleteDefinition } = useDeleteTextDefinition({
-    onSuccess: invalidateMeanings,
+    onSuccess: invalidateTextDefinitions,
+  });
+
+  const { generateTextDefinitionAudio } = useTextDefinitionGenerateAudio({
+    onSuccess: invalidateTextDefinitions,
   });
 
   const handleUpdateOpenChange = (open: boolean) => {
@@ -67,6 +72,12 @@ export const Table = memo(({}: Props) => {
     {
       label: "Удалить",
       action: (item: TextDefinitionOut) => deleteDefinition({ id: item.id }),
+    },
+    {
+      label: "Сгенерировать аудио",
+      shouldDisplay: (item: TextDefinitionOut) => !Boolean(item.audio?.id),
+      action: (item: TextDefinitionOut) =>
+        generateTextDefinitionAudio({ id: item.id }),
     },
   ];
 
@@ -141,13 +152,13 @@ export const Table = memo(({}: Props) => {
       <CreateSheet
         isOpen={isCreateSheetOpened}
         onOpenChange={setIsCreateSheetOpened}
-        onSuccess={invalidateMeanings}
+        onSuccess={invalidateTextDefinitions}
       />
       <UpdateSheet
         id={idToUpdate}
         isOpen={isUpdateSheetOpened}
         onOpenChange={handleUpdateOpenChange}
-        onSuccess={invalidateMeanings}
+        onSuccess={invalidateTextDefinitions}
       />
     </div>
   );

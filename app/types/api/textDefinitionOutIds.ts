@@ -4,6 +4,7 @@
  * admin
  * OpenAPI spec version: 0.1.0
  */
+import type { TextDefinitionOutIdsAudioId } from './textDefinitionOutIdsAudioId';
 import type { TextDefinitionOutIdsCategoryId } from './textDefinitionOutIdsCategoryId';
 import type { TextDefinitionOutIdsLevelId } from './textDefinitionOutIdsLevelId';
 
@@ -11,6 +12,7 @@ export interface TextDefinitionOutIds {
   id: number;
   text: string;
   type?: 'text';
+  audioId?: TextDefinitionOutIdsAudioId;
   categoryId?: TextDefinitionOutIdsCategoryId;
   levelId?: TextDefinitionOutIdsLevelId;
   meaningIds?: number[];

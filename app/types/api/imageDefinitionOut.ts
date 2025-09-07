@@ -4,21 +4,21 @@
  * admin
  * OpenAPI spec version: 0.1.0
  */
-import type { AssetOut } from './assetOut';
 import type { ImageDefinitionOutCategoryId } from './imageDefinitionOutCategoryId';
 import type { ImageDefinitionOutLevelId } from './imageDefinitionOutLevelId';
+import type { ImageAssetOut } from './imageAssetOut';
 import type { ImageDefinitionOutCategory } from './imageDefinitionOutCategory';
 import type { ImageDefinitionOutLevel } from './imageDefinitionOutLevel';
 import type { MeaningOut } from './meaningOut';
 
 export interface ImageDefinitionOut {
   id: number;
+  type?: 'image';
   imageId: number;
-  image: AssetOut;
   categoryId?: ImageDefinitionOutCategoryId;
   levelId?: ImageDefinitionOutLevelId;
   meaningIds?: number[];
-  type?: 'image';
+  image: ImageAssetOut;
   category?: ImageDefinitionOutCategory;
   level?: ImageDefinitionOutLevel;
   meanings?: MeaningOut[];

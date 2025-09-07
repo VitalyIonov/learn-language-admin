@@ -5,8 +5,4 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface UploadImageResponse {
-  uploadUrl: string;
-  fileKey: string;
-  imageId: number;
-}
+export type TextDefinitionUpdateAudioId = number | null;

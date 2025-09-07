@@ -5,7 +5,6 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface UploadImageRequest {
-  contentType: string;
-  sizeBytes: number;
+export interface ImageAssetCommitOut {
+  imageUrl: string;
 }

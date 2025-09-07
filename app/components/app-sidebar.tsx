@@ -1,4 +1,4 @@
-import { Home, Inbox, Search, Settings } from "lucide-react";
+import { Home, Inbox } from "lucide-react";
 import { type UserOut } from "~/types/api";
 
 import {

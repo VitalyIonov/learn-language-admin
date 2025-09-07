@@ -15,8 +15,10 @@ import type {
   CategoryCreate,
   CategoryOut,
   CategoryUpdate,
-  CommitImageRequest,
-  CommitImageResponse,
+  ImageAssetCommit,
+  ImageAssetCommitOut,
+  ImageAssetUpload,
+  ImageAssetUploadOut,
   ImageDefinitionCreate,
   ImageDefinitionListResponse,
   ImageDefinitionOut,
@@ -39,8 +41,6 @@ import type {
   TextDefinitionListResponse,
   TextDefinitionOutIds,
   TextDefinitionUpdate,
-  UploadImageRequest,
-  UploadImageResponse,
   UserOut,
   UsersListResponse
 } from './api';
@@ -287,6 +287,17 @@ const deleteTextDefinitionTextDefinitionsDefinitionIdDelete = <TData = AxiosResp
   }
 
 /**
+ * @summary Generate Audio
+ */
+const generateAudioTextDefinitionsDefinitionIdGenerateAudioPost = <TData = AxiosResponse<TextDefinitionOutIds>>(
+    definitionId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/text_definitions/${definitionId}/generate_audio`,undefined,options
+    );
+  }
+
+/**
  * @summary Read Image Definitions
  */
 const readImageDefinitionsImageDefinitionsGet = <TData = AxiosResponse<ImageDefinitionListResponse>>(
@@ -349,24 +360,24 @@ const deleteImageDefinitionImageDefinitionsDefinitionIdDelete = <TData = AxiosRe
 /**
  * @summary Init Image Upload
  */
-const initImageUploadImagesUploadInitPost = <TData = AxiosResponse<UploadImageResponse>>(
-    uploadImageRequest: UploadImageRequest, options?: AxiosRequestConfig
+const initImageUploadImagesUploadInitPost = <TData = AxiosResponse<ImageAssetUploadOut>>(
+    imageAssetUpload: ImageAssetUpload, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
       `/images/upload-init`,
-      uploadImageRequest,options
+      imageAssetUpload,options
     );
   }
 
 /**
  * @summary Commit Image Upload
  */
-const commitImageUploadImagesUploadCommitPost = <TData = AxiosResponse<CommitImageResponse>>(
-    commitImageRequest: CommitImageRequest, options?: AxiosRequestConfig
+const commitImageUploadImagesUploadCommitPost = <TData = AxiosResponse<ImageAssetCommitOut>>(
+    imageAssetCommit: ImageAssetCommit, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
       `/images/upload-commit`,
-      commitImageRequest,options
+      imageAssetCommit,options
     );
   }
 
@@ -381,7 +392,7 @@ const readQuestionTypesQuestionTypesGet = <TData = AxiosResponse<QuestionTypeLis
     );
   }
 
-return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateCategoryEndpointCategoriesCategoryIdPatch,deleteCategoryEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,readTextDefinitionsTextDefinitionsGet,addTextDefinitionTextDefinitionsPost,readTextDefinitionTextDefinitionsDefinitionIdGet,patchTextDefinitionTextDefinitionsDefinitionIdPatch,deleteTextDefinitionTextDefinitionsDefinitionIdDelete,readImageDefinitionsImageDefinitionsGet,addImageDefinitionImageDefinitionsPost,readImageDefinitionImageDefinitionsDefinitionIdGet,patchImageDefinitionImageDefinitionsDefinitionIdPatch,deleteImageDefinitionImageDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet}};
+return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateCategoryEndpointCategoriesCategoryIdPatch,deleteCategoryEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,readTextDefinitionsTextDefinitionsGet,addTextDefinitionTextDefinitionsPost,readTextDefinitionTextDefinitionsDefinitionIdGet,patchTextDefinitionTextDefinitionsDefinitionIdPatch,deleteTextDefinitionTextDefinitionsDefinitionIdDelete,generateAudioTextDefinitionsDefinitionIdGenerateAudioPost,readImageDefinitionsImageDefinitionsGet,addImageDefinitionImageDefinitionsPost,readImageDefinitionImageDefinitionsDefinitionIdGet,patchImageDefinitionImageDefinitionsDefinitionIdPatch,deleteImageDefinitionImageDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet}};
 export type ReadUsersUsersGetResult = AxiosResponse<UsersListResponse>
 export type ReadUserCurrentUserGetResult = AxiosResponse<UserOut>
 export type ReadCategoryCategoriesCategoryIdGetResult = AxiosResponse<CategoryOut>
@@ -402,11 +413,12 @@ export type AddTextDefinitionTextDefinitionsPostResult = AxiosResponse<TextDefin
 export type ReadTextDefinitionTextDefinitionsDefinitionIdGetResult = AxiosResponse<TextDefinitionOutIds>
 export type PatchTextDefinitionTextDefinitionsDefinitionIdPatchResult = AxiosResponse<TextDefinitionOutIds>
 export type DeleteTextDefinitionTextDefinitionsDefinitionIdDeleteResult = AxiosResponse<unknown>
+export type GenerateAudioTextDefinitionsDefinitionIdGenerateAudioPostResult = AxiosResponse<TextDefinitionOutIds>
 export type ReadImageDefinitionsImageDefinitionsGetResult = AxiosResponse<ImageDefinitionListResponse>
 export type AddImageDefinitionImageDefinitionsPostResult = AxiosResponse<ImageDefinitionOut>
 export type ReadImageDefinitionImageDefinitionsDefinitionIdGetResult = AxiosResponse<ImageDefinitionOut>
 export type PatchImageDefinitionImageDefinitionsDefinitionIdPatchResult = AxiosResponse<ImageDefinitionOut>
 export type DeleteImageDefinitionImageDefinitionsDefinitionIdDeleteResult = AxiosResponse<unknown>
-export type InitImageUploadImagesUploadInitPostResult = AxiosResponse<UploadImageResponse>
-export type CommitImageUploadImagesUploadCommitPostResult = AxiosResponse<CommitImageResponse>
+export type InitImageUploadImagesUploadInitPostResult = AxiosResponse<ImageAssetUploadOut>
+export type CommitImageUploadImagesUploadCommitPostResult = AxiosResponse<ImageAssetCommitOut>
 export type ReadQuestionTypesQuestionTypesGetResult = AxiosResponse<QuestionTypeListResponse>
