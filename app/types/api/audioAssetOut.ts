@@ -5,17 +5,12 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { AssetStatus } from './assetStatus';
-import type { AudioAssetOutWidth } from './audioAssetOutWidth';
-import type { AudioAssetOutHeight } from './audioAssetOutHeight';
 
 export interface AudioAssetOut {
   id: number;
   status: AssetStatus;
   mimeType: string;
   sizeBytes: number;
-  alt: string;
-  width?: AudioAssetOutWidth;
-  height?: AudioAssetOutHeight;
   fileKey: string;
   url: string;
 }

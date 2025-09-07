@@ -7,8 +7,6 @@
 
 export * from './assetStatus';
 export * from './audioAssetOut';
-export * from './audioAssetOutHeight';
-export * from './audioAssetOutWidth';
 export * from './categoriesListResponse';
 export * from './categoryCreate';
 export * from './categoryCreateImageId';

@@ -121,6 +121,15 @@ export const Table = memo(({}: Props) => {
       ),
     },
     {
+      accessorKey: "audio",
+      header: "Audio",
+      cell: ({ row }: CellContext<TextDefinitionOut, void>) => (
+        <div className="text-foreground">
+          {row.original.audio?.url ? "true" : ""}
+        </div>
+      ),
+    },
+    {
       header: " ",
       size: 80,
       meta: { align: "center" as const },
@@ -139,7 +148,7 @@ export const Table = memo(({}: Props) => {
   };
 
   return (
-    <div className="flex w-250 flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <TableToolbar
         searchValue={searchValue}
         onSearchChange={handleSearchChange}
