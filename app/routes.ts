@@ -16,6 +16,7 @@ export default [
       route("meanings", "routes/meanings/index.tsx"),
       route("definitions/text", "routes/text-definitions/index.tsx"),
       route("definitions/image", "routes/image-definitions/index.tsx"),
+      route("issues", "routes/issues/index.ts"),
     ]),
 
     route("login", "routes/login.tsx"),

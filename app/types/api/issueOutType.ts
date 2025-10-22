@@ -4,5 +4,6 @@
  * admin
  * OpenAPI spec version: 0.1.0
  */
+import type { IssueTypeOut } from './issueTypeOut';
 
-export type MeaningUpdateName = number | null;
+export type IssueOutType = IssueTypeOut | null;

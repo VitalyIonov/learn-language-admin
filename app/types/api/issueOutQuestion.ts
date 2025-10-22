@@ -4,5 +4,6 @@
  * admin
  * OpenAPI spec version: 0.1.0
  */
+import type { QuestionOut } from './questionOut';
 
-export type MeaningUpdateName = number | null;
+export type IssueOutQuestion = QuestionOut | null;

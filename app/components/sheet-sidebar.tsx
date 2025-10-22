@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Sheet,
   SheetContent,
@@ -6,19 +6,25 @@ import {
   SheetTitle,
   SheetFooter,
   SheetClose,
-} from '~/components/ui/sheet';
-import { Button } from '~/components/ui/button';
-import { Separator } from '~/components/ui/separator';
+} from "~/components/ui/sheet";
+import { Button } from "~/components/ui/button";
+import { Separator } from "~/components/ui/separator";
 
 type Props = {
   title: string;
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  actionButton: React.ReactNode;
+  actionButton?: React.ReactNode;
   children: React.ReactNode;
 };
 
-export const SheetSidebar = ({ isOpen, onOpenChange, title, actionButton, children }: Props) => {
+export const SheetSidebar = ({
+  isOpen,
+  onOpenChange,
+  title,
+  actionButton,
+  children,
+}: Props) => {
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetContent className="gap-0">

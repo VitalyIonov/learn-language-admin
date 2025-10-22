@@ -7,9 +7,11 @@
 import type { MeaningUpdateName } from './meaningUpdateName';
 import type { MeaningUpdateCategoryId } from './meaningUpdateCategoryId';
 import type { MeaningUpdateLevelId } from './meaningUpdateLevelId';
+import type { MeaningUpdateAudioId } from './meaningUpdateAudioId';
 
 export interface MeaningUpdate {
   name?: MeaningUpdateName;
   categoryId?: MeaningUpdateCategoryId;
   levelId?: MeaningUpdateLevelId;
+  audioId?: MeaningUpdateAudioId;
 }

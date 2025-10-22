@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { clsx } from 'clsx';
+import * as React from "react";
+import { clsx } from "clsx";
 import {
   type ColumnDef,
   flexRender,
@@ -11,7 +11,7 @@ import {
   getSortedRowModel,
   type SortingState,
   useReactTable,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
 import {
   Table as UITable,
@@ -20,14 +20,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '~/components/ui/table';
+} from "~/components/ui/table";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function Table<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function Table<TData, TValue>({
+  columns,
+  data,
+}: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
@@ -52,40 +55,54 @@ export function Table<TData, TValue>({ columns, data }: DataTableProps<TData, TV
 
   return (
     <div className="w-auto rounded-md border">
-      <UITable className="table-fixed">
+      <UITable className="w-full table-auto">
+        {/* widths */}
+        <colgroup>
+          {table.getLeafHeaders().map((header) => {
+            const isFlex = header.column.columnDef.meta?.flex === true;
+            const px = header.getSize(); // берёт columnDef.size (число в px)
+            return (
+              <col
+                key={header.id}
+                style={isFlex ? { width: "auto" } : { width: `${px}px` }}
+              />
+            );
+          })}
+        </colgroup>
+
         <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead
-                    key={header.id}
-                    className={clsx(`text-${header.column.columnDef.meta?.align || 'left'}`)}
-                    colSpan={header.colSpan}
-                    style={{ width: header.column.columnDef.size ? header.getSize() : 'auto' }}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                );
-              })}
+          {table.getHeaderGroups().map((hg) => (
+            <TableRow key={hg.id}>
+              {hg.headers.map((h) => (
+                <TableHead
+                  key={h.id}
+                  className={clsx(
+                    `text-${h.column.columnDef.meta?.align || "left"}`,
+                  )}
+                >
+                  {h.isPlaceholder
+                    ? null
+                    : flexRender(h.column.columnDef.header, h.getContext())}
+                </TableHead>
+              ))}
             </TableRow>
           ))}
         </TableHeader>
+
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
                     className={clsx(
-                      `text-${cell.column.columnDef.meta?.align || 'left'}`,
-                      'whitespace-normal',
-                      'break-words',
+                      `text-${cell.column.columnDef.meta?.align || "left"}`,
+                      "break-words whitespace-normal",
                     )}
-                    style={{ width: cell.column.columnDef.size ? cell.column.getSize() : 'auto' }}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>

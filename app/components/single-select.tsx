@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Check, ChevronDown } from 'lucide-react';
-import { cn } from '~/lib/utils';
-import { Button } from '~/components/ui/button';
+import * as React from "react";
+import { Check, ChevronDown } from "lucide-react";
+import { cn } from "~/lib/utils";
+import { Button } from "~/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -9,8 +9,12 @@ import {
   CommandList,
   CommandInput,
   CommandItem,
-} from '~/components/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
+} from "~/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover";
 
 export type Option = {
   id: number;
@@ -22,6 +26,7 @@ export type SingleSelectProps<Data extends Record<string, any>> = {
   value?: number;
   searchQuery?: string;
   labelKey: string;
+  disabled?: boolean;
   onSearchQueryChange?: (query: string) => void;
   onChange: (value: number | null) => void;
   placeholder?: string;
@@ -33,6 +38,7 @@ export function SingleSelect<Data extends Record<string, any>>({
   searchQuery,
   onSearchQueryChange,
   labelKey,
+  disabled,
   onChange,
   placeholder,
 }: SingleSelectProps<Data>) {
@@ -57,15 +63,21 @@ export function SingleSelect<Data extends Record<string, any>>({
       setOpen(false);
     }
 
-    onSearchQueryChange?.('');
+    onSearchQueryChange?.("");
   };
 
-  const preparedValue = selectedLabel || placeholder || 'Select...';
+  const preparedValue = selectedLabel || placeholder || "Select...";
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className="justify-between">
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          disabled={disabled}
+          className="justify-between"
+        >
           <span className="block truncate" title={preparedValue}>
             {preparedValue}
           </span>
@@ -78,6 +90,7 @@ export function SingleSelect<Data extends Record<string, any>>({
             <CommandInput
               placeholder="Search..."
               value={searchQuery}
+              disabled={disabled}
               onValueChange={onSearchQueryChange}
             />
           ) : null}
@@ -89,8 +102,8 @@ export function SingleSelect<Data extends Record<string, any>>({
                   key={opt.id}
                   onSelect={() => handleSelect(opt.id)}
                   className={cn(
-                    'flex items-center justify-between',
-                    opt.id === value && 'bg-accent',
+                    "flex items-center justify-between",
+                    opt.id === value && "bg-accent",
                   )}
                 >
                   {opt.label}

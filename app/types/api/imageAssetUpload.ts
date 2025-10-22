@@ -8,4 +8,5 @@
 export interface ImageAssetUpload {
   contentType: string;
   sizeBytes: number;
+  alt: string;
 }

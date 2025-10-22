@@ -15,6 +15,7 @@ import type {
   CategoryCreate,
   CategoryOut,
   CategoryUpdate,
+  GetIssuesIssuesGetParams,
   ImageAssetCommit,
   ImageAssetCommitOut,
   ImageAssetUpload,
@@ -23,6 +24,10 @@ import type {
   ImageDefinitionListResponse,
   ImageDefinitionOut,
   ImageDefinitionUpdate,
+  IssueOut,
+  IssueStatusListResponse,
+  IssueUpdate,
+  IssuesListResponse,
   LevelCreate,
   LevelOut,
   LevelsListResponse,
@@ -227,6 +232,17 @@ const deleteMeaningEndpointMeaningsMeaningIdDelete = <TData = AxiosResponse<unkn
   }
 
 /**
+ * @summary Generate Audio
+ */
+const generateAudioMeaningsMeaningIdGenerateAudioPost = <TData = AxiosResponse<MeaningOut>>(
+    meaningId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/meanings/${meaningId}/generate_audio`,undefined,options
+    );
+  }
+
+/**
  * @summary Read Text Definitions
  */
 const readTextDefinitionsTextDefinitionsGet = <TData = AxiosResponse<TextDefinitionListResponse>>(
@@ -392,7 +408,55 @@ const readQuestionTypesQuestionTypesGet = <TData = AxiosResponse<QuestionTypeLis
     );
   }
 
-return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateCategoryEndpointCategoriesCategoryIdPatch,deleteCategoryEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,readTextDefinitionsTextDefinitionsGet,addTextDefinitionTextDefinitionsPost,readTextDefinitionTextDefinitionsDefinitionIdGet,patchTextDefinitionTextDefinitionsDefinitionIdPatch,deleteTextDefinitionTextDefinitionsDefinitionIdDelete,generateAudioTextDefinitionsDefinitionIdGenerateAudioPost,readImageDefinitionsImageDefinitionsGet,addImageDefinitionImageDefinitionsPost,readImageDefinitionImageDefinitionsDefinitionIdGet,patchImageDefinitionImageDefinitionsDefinitionIdPatch,deleteImageDefinitionImageDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet}};
+/**
+ * @summary Get Issue
+ */
+const getIssueIssuesIssueIdGet = <TData = AxiosResponse<IssueOut>>(
+    issueId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/issues/${issueId}`,options
+    );
+  }
+
+/**
+ * @summary Update Issue
+ */
+const updateIssueIssuesIssueIdPatch = <TData = AxiosResponse<IssueOut>>(
+    issueId: number,
+    issueUpdate: IssueUpdate, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/issues/${issueId}`,
+      issueUpdate,options
+    );
+  }
+
+/**
+ * @summary Get Issues
+ */
+const getIssuesIssuesGet = <TData = AxiosResponse<IssuesListResponse>>(
+    params?: GetIssuesIssuesGetParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/issues`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+/**
+ * @summary Get Issue Statuses
+ */
+const getIssueStatusesIssueStatusesGet = <TData = AxiosResponse<IssueStatusListResponse>>(
+     options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/issue_statuses`,options
+    );
+  }
+
+return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateCategoryEndpointCategoriesCategoryIdPatch,deleteCategoryEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,generateAudioMeaningsMeaningIdGenerateAudioPost,readTextDefinitionsTextDefinitionsGet,addTextDefinitionTextDefinitionsPost,readTextDefinitionTextDefinitionsDefinitionIdGet,patchTextDefinitionTextDefinitionsDefinitionIdPatch,deleteTextDefinitionTextDefinitionsDefinitionIdDelete,generateAudioTextDefinitionsDefinitionIdGenerateAudioPost,readImageDefinitionsImageDefinitionsGet,addImageDefinitionImageDefinitionsPost,readImageDefinitionImageDefinitionsDefinitionIdGet,patchImageDefinitionImageDefinitionsDefinitionIdPatch,deleteImageDefinitionImageDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet,getIssueIssuesIssueIdGet,updateIssueIssuesIssueIdPatch,getIssuesIssuesGet,getIssueStatusesIssueStatusesGet}};
 export type ReadUsersUsersGetResult = AxiosResponse<UsersListResponse>
 export type ReadUserCurrentUserGetResult = AxiosResponse<UserOut>
 export type ReadCategoryCategoriesCategoryIdGetResult = AxiosResponse<CategoryOut>
@@ -408,6 +472,7 @@ export type AddMeaningMeaningsPostResult = AxiosResponse<MeaningOut>
 export type ReadMeaningMeaningsMeaningIdGetResult = AxiosResponse<MeaningOut>
 export type UpdateMeaningEndpointMeaningsMeaningIdPatchResult = AxiosResponse<MeaningOut>
 export type DeleteMeaningEndpointMeaningsMeaningIdDeleteResult = AxiosResponse<unknown>
+export type GenerateAudioMeaningsMeaningIdGenerateAudioPostResult = AxiosResponse<MeaningOut>
 export type ReadTextDefinitionsTextDefinitionsGetResult = AxiosResponse<TextDefinitionListResponse>
 export type AddTextDefinitionTextDefinitionsPostResult = AxiosResponse<TextDefinitionOutIds>
 export type ReadTextDefinitionTextDefinitionsDefinitionIdGetResult = AxiosResponse<TextDefinitionOutIds>
@@ -422,3 +487,7 @@ export type DeleteImageDefinitionImageDefinitionsDefinitionIdDeleteResult = Axio
 export type InitImageUploadImagesUploadInitPostResult = AxiosResponse<ImageAssetUploadOut>
 export type CommitImageUploadImagesUploadCommitPostResult = AxiosResponse<ImageAssetCommitOut>
 export type ReadQuestionTypesQuestionTypesGetResult = AxiosResponse<QuestionTypeListResponse>
+export type GetIssueIssuesIssueIdGetResult = AxiosResponse<IssueOut>
+export type UpdateIssueIssuesIssueIdPatchResult = AxiosResponse<IssueOut>
+export type GetIssuesIssuesGetResult = AxiosResponse<IssuesListResponse>
+export type GetIssueStatusesIssueStatusesGetResult = AxiosResponse<IssueStatusListResponse>

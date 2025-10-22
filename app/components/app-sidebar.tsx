@@ -55,6 +55,11 @@ const items = [
       },
     ],
   },
+  {
+    title: "Issues",
+    url: "/admin/issues",
+    icon: Inbox,
+  },
 ];
 
 type Props = {
