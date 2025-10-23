@@ -131,7 +131,6 @@ export const InputFileField = ({
                 </div>
               )}
 
-              {/* File Input - показывать только если нет изображения */}
               {showFileInput && (
                 <div className="flex items-center gap-2">
                   <Input
@@ -192,7 +191,6 @@ export const InputFileField = ({
                 </div>
               )}
 
-              {/* Status Messages */}
               {uploadStatus === "error" && (
                 <p className="text-sm text-red-600">
                   Upload failed. Please try again.

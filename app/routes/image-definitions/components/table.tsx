@@ -77,7 +77,7 @@ export const Table = memo(({}: Props) => {
       cell: ({ row }: CellContext<ImageDefinitionOut, void>) => (
         <div className="text-foreground">
           <img
-            src={row.original.image.imageUrl}
+            src={row.original.image.url}
             alt="Current image"
             className="max-h-18 max-w-full border border-border bg-stone-100 object-contain"
           />

@@ -1,4 +1,4 @@
-import { type ImageDefinitionOutIds } from "~/types/api";
+import { type ImageDefinitionOut } from "~/types/api";
 import { type AxiosResponse } from "axios";
 import type { UseQueryOptions } from "@tanstack/react-query";
 
@@ -7,14 +7,14 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "~/lib/apiClient/apiClient";
 
 type Params = {
-  id: ImageDefinitionOutIds["id"] | null;
+  id: ImageDefinitionOut["id"] | null;
 };
 
 type Options = Omit<
   UseQueryOptions<
-    AxiosResponse<ImageDefinitionOutIds>,
+    AxiosResponse<ImageDefinitionOut>,
     unknown,
-    AxiosResponse<ImageDefinitionOutIds>
+    AxiosResponse<ImageDefinitionOut>
   >,
   "queryKey" | "queryFn"
 >;
@@ -24,7 +24,7 @@ export const useLoadImageDefinition = ({ id }: Params, options?: Options) => {
   const url = `admin/image_definitions/${id}`;
 
   const { data, isFetching } = useQuery<
-    AxiosResponse<ImageDefinitionOutIds>,
+    AxiosResponse<ImageDefinitionOut>,
     unknown
   >({
     queryKey: [url],

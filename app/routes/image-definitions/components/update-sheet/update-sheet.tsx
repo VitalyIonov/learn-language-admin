@@ -58,7 +58,7 @@ export const UpdateSheet = ({ id, isOpen, onOpenChange, onSuccess }: Props) => {
       <Form
         id={FORM_ID}
         defaultValues={defaultValues}
-        imageUrl={definition.image.imageUrl}
+        imageUrl={definition.image.url}
         onSubmit={handleUpdateDefinition}
       />
     </SheetSidebar>

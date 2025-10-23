@@ -23,6 +23,7 @@ export const useFileUpload = () => {
       const { data: uploadInitData } = await imageUploadInit({
         contentType: file.type,
         sizeBytes: file.size,
+        alt: file.name,
       });
       setUploadProgress(33);
 

@@ -61,7 +61,7 @@ export const UpdateCategorySheet = ({
       <CategoryForm
         id={FORM_ID}
         defaultValues={defaultValues}
-        imageUrl={category?.image?.imageUrl}
+        imageUrl={category?.image?.url}
         onSubmit={handleUpdateCategory}
       />
     </SheetSidebar>

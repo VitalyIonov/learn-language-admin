@@ -1,4 +1,4 @@
-import { type UploadImageResponse, type UploadImageRequest } from "~/types/api";
+import { type ImageAssetUpload, type ImageAssetUploadOut } from "~/types/api";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -9,8 +9,8 @@ export const useImageUploadInit = () => {
 
   const { mutateAsync } = useMutation({
     mutationKey: [url],
-    mutationFn: (data: UploadImageRequest) =>
-      apiClient.post<UploadImageResponse, UploadImageRequest>(url, data),
+    mutationFn: (data: ImageAssetUpload) =>
+      apiClient.post<ImageAssetUploadOut, ImageAssetUpload>(url, data),
   });
 
   return { imageUploadInit: mutateAsync };
