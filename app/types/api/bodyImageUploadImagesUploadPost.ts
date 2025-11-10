@@ -5,7 +5,6 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface ImageAssetUploadOut {
-  imageId: number;
-  imageUrl: string;
+export interface BodyImageUploadImagesUploadPost {
+  file: Blob;
 }

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router";
+import { useSearchParams } from "react-router";
 
 import type { Route } from "./+types/login";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";

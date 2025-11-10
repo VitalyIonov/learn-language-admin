@@ -33,6 +33,18 @@ const authCallbackGoogleCallbackGet = <TData = AxiosResponse<unknown>>(
     );
   }
 
-return {loginGoogleLoginGet,authCallbackGoogleCallbackGet}};
+/**
+ * @summary Logout
+ */
+const logoutLogoutPost = <TData = AxiosResponse<unknown>>(
+     options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/logout`,undefined,options
+    );
+  }
+
+return {loginGoogleLoginGet,authCallbackGoogleCallbackGet,logoutLogoutPost}};
 export type LoginGoogleLoginGetResult = AxiosResponse<unknown>
 export type AuthCallbackGoogleCallbackGetResult = AxiosResponse<unknown>
+export type LogoutLogoutPostResult = AxiosResponse<unknown>

@@ -11,6 +11,7 @@ import type {
 } from 'axios';
 
 import type {
+  BodyImageUploadImagesUploadPost,
   CategoriesListResponse,
   CategoryCreate,
   CategoryOut,
@@ -18,7 +19,8 @@ import type {
   GetIssuesIssuesGetParams,
   ImageAssetCommit,
   ImageAssetCommitOut,
-  ImageAssetUpload,
+  ImageAssetUploadInit,
+  ImageAssetUploadInitOut,
   ImageAssetUploadOut,
   ImageDefinitionCreate,
   ImageDefinitionListResponse,
@@ -376,12 +378,26 @@ const deleteImageDefinitionImageDefinitionsDefinitionIdDelete = <TData = AxiosRe
 /**
  * @summary Init Image Upload
  */
-const initImageUploadImagesUploadInitPost = <TData = AxiosResponse<ImageAssetUploadOut>>(
-    imageAssetUpload: ImageAssetUpload, options?: AxiosRequestConfig
+const initImageUploadImagesUploadInitPost = <TData = AxiosResponse<ImageAssetUploadInitOut>>(
+    imageAssetUploadInit: ImageAssetUploadInit, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
       `/images/upload-init`,
-      imageAssetUpload,options
+      imageAssetUploadInit,options
+    );
+  }
+
+/**
+ * @summary Image Upload
+ */
+const imageUploadImagesUploadPost = <TData = AxiosResponse<ImageAssetUploadOut>>(
+    bodyImageUploadImagesUploadPost: BodyImageUploadImagesUploadPost, options?: AxiosRequestConfig
+ ): Promise<TData> => {const formData = new FormData();
+formData.append(`file`, bodyImageUploadImagesUploadPost.file)
+
+    return axios.post(
+      `/images/upload`,
+      formData,options
     );
   }
 
@@ -456,7 +472,7 @@ const getIssueStatusesIssueStatusesGet = <TData = AxiosResponse<IssueStatusListR
     );
   }
 
-return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateCategoryEndpointCategoriesCategoryIdPatch,deleteCategoryEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,generateAudioMeaningsMeaningIdGenerateAudioPost,readTextDefinitionsTextDefinitionsGet,addTextDefinitionTextDefinitionsPost,readTextDefinitionTextDefinitionsDefinitionIdGet,patchTextDefinitionTextDefinitionsDefinitionIdPatch,deleteTextDefinitionTextDefinitionsDefinitionIdDelete,generateAudioTextDefinitionsDefinitionIdGenerateAudioPost,readImageDefinitionsImageDefinitionsGet,addImageDefinitionImageDefinitionsPost,readImageDefinitionImageDefinitionsDefinitionIdGet,patchImageDefinitionImageDefinitionsDefinitionIdPatch,deleteImageDefinitionImageDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet,getIssueIssuesIssueIdGet,updateIssueIssuesIssueIdPatch,getIssuesIssuesGet,getIssueStatusesIssueStatusesGet}};
+return {readUsersUsersGet,readUserCurrentUserGet,readCategoryCategoriesCategoryIdGet,updateCategoryEndpointCategoriesCategoryIdPatch,deleteCategoryEndpointCategoriesCategoryIdDelete,addCategoryCategoriesPost,readCategoriesCategoriesGet,addLevelLevelsPost,readLevelsLevelsGet,deleteLevelEndpointLevelsLevelIdDelete,readMeaningsMeaningsGet,addMeaningMeaningsPost,readMeaningMeaningsMeaningIdGet,updateMeaningEndpointMeaningsMeaningIdPatch,deleteMeaningEndpointMeaningsMeaningIdDelete,generateAudioMeaningsMeaningIdGenerateAudioPost,readTextDefinitionsTextDefinitionsGet,addTextDefinitionTextDefinitionsPost,readTextDefinitionTextDefinitionsDefinitionIdGet,patchTextDefinitionTextDefinitionsDefinitionIdPatch,deleteTextDefinitionTextDefinitionsDefinitionIdDelete,generateAudioTextDefinitionsDefinitionIdGenerateAudioPost,readImageDefinitionsImageDefinitionsGet,addImageDefinitionImageDefinitionsPost,readImageDefinitionImageDefinitionsDefinitionIdGet,patchImageDefinitionImageDefinitionsDefinitionIdPatch,deleteImageDefinitionImageDefinitionsDefinitionIdDelete,initImageUploadImagesUploadInitPost,imageUploadImagesUploadPost,commitImageUploadImagesUploadCommitPost,readQuestionTypesQuestionTypesGet,getIssueIssuesIssueIdGet,updateIssueIssuesIssueIdPatch,getIssuesIssuesGet,getIssueStatusesIssueStatusesGet}};
 export type ReadUsersUsersGetResult = AxiosResponse<UsersListResponse>
 export type ReadUserCurrentUserGetResult = AxiosResponse<UserOut>
 export type ReadCategoryCategoriesCategoryIdGetResult = AxiosResponse<CategoryOut>
@@ -484,7 +500,8 @@ export type AddImageDefinitionImageDefinitionsPostResult = AxiosResponse<ImageDe
 export type ReadImageDefinitionImageDefinitionsDefinitionIdGetResult = AxiosResponse<ImageDefinitionOut>
 export type PatchImageDefinitionImageDefinitionsDefinitionIdPatchResult = AxiosResponse<ImageDefinitionOut>
 export type DeleteImageDefinitionImageDefinitionsDefinitionIdDeleteResult = AxiosResponse<unknown>
-export type InitImageUploadImagesUploadInitPostResult = AxiosResponse<ImageAssetUploadOut>
+export type InitImageUploadImagesUploadInitPostResult = AxiosResponse<ImageAssetUploadInitOut>
+export type ImageUploadImagesUploadPostResult = AxiosResponse<ImageAssetUploadOut>
 export type CommitImageUploadImagesUploadCommitPostResult = AxiosResponse<ImageAssetCommitOut>
 export type ReadQuestionTypesQuestionTypesGetResult = AxiosResponse<QuestionTypeListResponse>
 export type GetIssueIssuesIssueIdGetResult = AxiosResponse<IssueOut>

@@ -7,6 +7,7 @@
 
 export * from './assetStatus';
 export * from './audioAssetOut';
+export * from './bodyImageUploadImagesUploadPost';
 export * from './categoriesListResponse';
 export * from './categoryCreate';
 export * from './categoryCreateImageId';
@@ -21,8 +22,10 @@ export * from './imageAssetCommit';
 export * from './imageAssetCommitOut';
 export * from './imageAssetOut';
 export * from './imageAssetOutHeight';
+export * from './imageAssetOutSizeBytes';
 export * from './imageAssetOutWidth';
-export * from './imageAssetUpload';
+export * from './imageAssetUploadInit';
+export * from './imageAssetUploadInitOut';
 export * from './imageAssetUploadOut';
 export * from './imageDefinitionCreate';
 export * from './imageDefinitionCreateCategoryId';
