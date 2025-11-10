@@ -5,9 +5,6 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 
-ARG VITE_API_URL=/api/v1
-ENV VITE_API_URL=${VITE_API_URL}
-
 RUN npx react-router build
 
 FROM node:20-alpine AS prod
